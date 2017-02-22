@@ -1,0 +1,25 @@
+{
+  "name": "twitterappkm",
+  "version": "1.0.0",
+  "description": "An application that uses the Twitter API to allow users to search for Tweets based on username, a specified search term and/or location.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickcostanzo42/TwitterAppKM.git"
+  },
+  "author": "Nick Costanzo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickcostanzo42/TwitterAppKM/issues"
+  },
+  "homepage": "https://github.com/nickcostanzo42/TwitterAppKM#readme",
+  "dependencies": {
+    "express": "^4.14.1",
+    "mustache-express": "^1.2.4",
+    "nodemon": "^1.11.0"
+  }
+}
