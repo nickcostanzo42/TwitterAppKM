@@ -7,6 +7,6 @@ JS Libraries:
 jQuery
 
 NPM Packages used:
-Express, Mustache-Express, Nodemon, Request, and Twitter
+Express, Mustache-Express, Nodemon, Request, Dotenv, and Twitter
 
 **Note the bearer-token-script used for authentacting for Twitter usage
