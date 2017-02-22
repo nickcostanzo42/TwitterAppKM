@@ -1,3 +1,6 @@
+// Environment Variables
+require('dotenv').config()
+
 // Open port on 4200
 const PORT = process.env.PORT || 4200;
 
@@ -24,11 +27,11 @@ var request = require('request');
 // Setup for Twitter package
 // Getting Bearer token to access Twitter API
 // Twitter Keys
-var consumerKey =
-var consumerSecret =
-// Bearer Token
-var bearerToken =
-// console.log(consumerKey)
+var consumerKey = process.env.CONSUMER_KEY_TWITTER
+var consumerSecret = process.env.CONSUMER_SECRET_TWITTER
+// // Bearer Token
+var bearerToken = process.env.BEARER_TOKEN_TWITTER
+console.log(consumerKey)
 
 // Script used for getting bearer token
 // var bearerTokenTo64 = function() {
