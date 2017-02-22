@@ -26,75 +26,49 @@ var request = require('request');
 
 // Setup for Twitter package
 // Getting Bearer token to access Twitter API
-// Twitter Keys
+// Twitter Keys and Bearer token
 var consumerKey = process.env.CONSUMER_KEY_TWITTER
 var consumerSecret = process.env.CONSUMER_SECRET_TWITTER
-// // Bearer Token
 var bearerToken = process.env.BEARER_TOKEN_TWITTER
-console.log(consumerKey)
-
-// Script used for getting bearer token
-// var bearerTokenTo64 = function() {
-//   return new Buffer(consumerKey + ':' + consumerSecret).toString('base64');
-// };
-
-// var getBearerToken = function() {
-
-//   if(bearerToken === null) {
-//     var bearerCredentials = bearerTokenTo64();
-
-//     // Header options for token request
-//     var oauthOptions = {
-//       'url': 'https://api.twitter.com/oauth2/token',
-//       'method': 'POST',
-//       'headers': {
-//         'Authorization': 'Basic ' + bearerCredentials,
-//         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-//         'Content-Length': 29,
-//       },
-//       'body': 'grant_type=client_credentials'
-//     }
-
-//     // Post request for bearer token
-//     request.post(oauthOptions, function(err, res, body) {
-//       if(err) cb(err);
-//       else{
-//         var bodyjson = JSON.parse(body);
-//         bearer = bodyjson.access_token;
-//         console.log(bearer)
-//       }
-//     });
-//   }
-//   else{
-//     console.log('You already have created a bearer token');
-//   }
-// }
-
-// bearerToken = getBearerToken();
-// console.log(bearerToken)
 
 var Twitter = require('twitter');
 
-var client = new Twitter({
+var Tweets = new Twitter({
   consumer_key: consumerKey,
   consumer_secret: consumerSecret,
   bearer_token: bearerToken
 });
 
-var params = {screen_name: 'nodejs'};
-client.get('statuses/user_timeline', params, function(error, tweets, response) {
-  if (!error) {
-    console.log(tweets);
-  } else {
-    console.log(error)
-  }
+//Rendering pages
+// If they only choose to search User-Name
+app.get('/:screenName/:searchTerm/:numOfTweets', function(req, res){
+
+  screenName = "from:" + req.params.screenName;
+  // console.log(screenName);
+  searchTerm = req.params.searchTerm;
+  // console.log(searchTerm);
+  numOfTweets = req.params.numOfTweets;
+  // console.log(numOfTweets);
+
+  var params = {q: screenName+" "+searchTerm, count: numOfTweets };
+
+  Tweets.get('search/tweets', params, function(error, tweets, response) {
+    if (!error) {
+      return res.json({ tweets: tweets })
+    } else {
+      console.log(error)
+    }
+  });
+});
+
+//Twitter Search
+app.get('/', function(req, res){
+  res.render('index')
 });
 
 
-//Rendering pages
-app.get('/', function(req, res){
-  res.render('index')
-})
+
+
 
 
 

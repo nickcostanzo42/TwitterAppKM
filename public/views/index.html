@@ -9,13 +9,17 @@
 
   <h1>Twitter Search</h1>
 
-  <form>
-    Username: <input type='text' name='search' id='search' value="" />
+  <form id="searchForm">
+    <label for="screenName">Screen Name:</label>
+    <input type='text' name='screenName' id='screenName' value="" />
     <br />
-    Username: <input type='text' name='search' id='search' value="" />
+
+    <label for="searchTerm">Search Term:</label>
+    <input type='text' name='searchTerm' id='searchTerm' value="" />
     <br />
-    Number of Tweets:
-    <select name="location" id="location">
+
+    <label for="numOfTweets">Number of Results:</label>
+    <select name="numOfTweets" id="numOfTweets" value="" >
       <option value='1'>1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -27,7 +31,22 @@
       <option value="9">9</option>
       <option value="10">10</option>
     </select>
+    <br />
+
+    <label for="loc">Location:</label>
+    <input type='text' name='loc' id='loc' value="" />
+    <br />
+
+    <input type="submit" value="Submit"></input>
+
   </form>
+  <br />
+
+  <div id="errorMessage">
+  </div>
+
+  Tweets go here:
+
 
   </body>
 <!-- Include jQuery -->
