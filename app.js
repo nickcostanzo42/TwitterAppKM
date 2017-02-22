@@ -24,10 +24,10 @@ var request = require('request');
 // Setup for Twitter package
 // Getting Bearer token to access Twitter API
 // Twitter Keys
-var consumerKey = '8lyQNtBxcTVrXO3iQpm4nOyHU';
-var consumerSecret = '4AX5p1kGSJpcNGiDRAIEOENgDvKMoUz9lqSzuMFaL555wwRZVm';
+var consumerKey =
+var consumerSecret =
 // Bearer Token
-var bearerToken = 'AAAAAAAAAAAAAAAAAAAAAMhTzQAAAAAAgRWeP%2FSZTBGrK5RrEy%2B9dCwlmas%3Dip7d8UyvzJIBnJa6K8FWIS7IFNkwRWrXz1qYuBEoZDYF0ipjBk';
+var bearerToken =
 // console.log(consumerKey)
 
 // Script used for getting bearer token

@@ -1,1 +1,2 @@
-./variables.env
+# Untracked Files
+.env
