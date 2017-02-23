@@ -49,11 +49,8 @@ app.get('/', function(req, res){
 app.get('/both/:screenName/:searchTerm/:numOfTweets', function(req, res){
 
   screenName = "from:" + req.params.screenName;
-  // console.log(screenName);
   searchTerm = req.params.searchTerm;
-  // console.log(searchTerm);
   numOfTweets = req.params.numOfTweets;
-  // console.log(numOfTweets);
 
   var params = {q: screenName+" "+searchTerm, count: numOfTweets };
 
@@ -69,9 +66,7 @@ app.get('/both/:screenName/:searchTerm/:numOfTweets', function(req, res){
 app.get('/screenNameOnly/:screenName/:numOfTweets', function(req, res){
 
   screenName = "from:" + req.params.screenName;
-  // console.log(screenName);
   numOfTweets = req.params.numOfTweets;
-  // console.log(numOfTweets);
 
   var params = {q: screenName, count: numOfTweets };
 
@@ -87,9 +82,7 @@ app.get('/screenNameOnly/:screenName/:numOfTweets', function(req, res){
 app.get('/searchTermOnly/:searchTerm/:numOfTweets', function(req, res){
 
   searchTerm = req.params.searchTerm;
-  // console.log(searchTerm);
   numOfTweets = req.params.numOfTweets;
-  // console.log(numOfTweets);
 
   var params = {q: searchTerm, count: numOfTweets };
 
@@ -108,11 +101,8 @@ app.get('/searchTermOnly/:searchTerm/:numOfTweets', function(req, res){
 app.get('/both/:screenName/:searchTerm/:numOfTweets/:longitude/:latitude', function(req, res){
 
   screenName = "from:" + req.params.screenName;
-  // console.log(screenName);
   searchTerm = req.params.searchTerm;
-  // console.log(searchTerm);
   numOfTweets = req.params.numOfTweets;
-  // console.log(numOfTweets);
   geoLocation = req.params.latitude + ',' + req.params.longitude + ',50mi';
   console.log(geoLocation);
 
@@ -131,9 +121,7 @@ app.get('/screenNameOnly/:screenName/:numOfTweets/:longitude/:latitude',
   function(req, res){
 
   screenName = "from:" + req.params.screenName;
-  // console.log(screenName);
   numOfTweets = req.params.numOfTweets;
-  // console.log(numOfTweets);
   geoLocation = req.params.latitude + ',' + req.params.longitude + ',50mi';
   console.log(geoLocation)
 
@@ -153,9 +141,7 @@ app.get('/searchTermonly/:searchTerm/:numOfTweets/:longitude/:latitude',
   function(req, res){
 
   searchTerm = req.params.searchTerm;
-  // console.log(searchTerm);
   numOfTweets = req.params.numOfTweets;
-  // console.log(numOfTweets);
   geoLocation = req.params.latitude + ',' + req.params.longitude + ',50mi';
 
   var params = {q: searchTerm, count: numOfTweets, geocode: geoLocation };

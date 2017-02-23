@@ -1,0 +1,16 @@
+#errorMessage {
+  color: red;
+  text-align: center;
+}
+
+#tweetCard {
+  padding: 10px 25px 10px 25px;
+}
+
+#profileImage {
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+

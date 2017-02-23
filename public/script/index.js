@@ -8,7 +8,7 @@ $('#searchForm').submit(function(e){
   numOfTweets = $('#numOfTweets').val();
   loc = $('#loc').val();
   formatLoc = loc.replace(/\s\s+/g, ' ').replace(/ /g, '+');
-  geolocURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + formatLoc + '&key=GOOGLE_API_KEY_GOES_HERE';
+  geolocURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + formatLoc + 'GOOGLE_API_KEY_GOES_HERE';
 
   // Callback for twitter API call
   twitterApiCall = function(screenName, searchTerm, numOfTweets) {
@@ -24,15 +24,35 @@ $('#searchForm').submit(function(e){
       searchTerm + '/' + numOfTweets;
     }
 
-    console.log(twitterSearchUrl)
-
     $(function(){
     $.ajax({
       url: twitterSearchUrl,
       dataType: 'json',
       cache: 'false'
     }).done(function(data){
-      console.log(data)
+      results = data.tweets.statuses;
+      results.forEach(function(result){
+        $('#results').append(
+        "<div id='results'>" +
+          "<div class='row'>" +
+            "<div class='col s12'>" +
+              "<div id='tweetCard' class='card horizontal' draggable='true'>" +
+                "<div class='card-image'>" +
+                  "<img id='profileImage' src='" + result.user.profile_image_url + "'>" +
+                "</div>" +
+              "<div class='card-stacked'>" +
+                "<div class='card-content'>" +
+                  "<p>@" + result.user.screen_name + "</p>" +
+                  "<p>" + result.user.name + "</p>" +
+                  "<br />" +
+                  "<p>" + result.text + "</p>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</div>"
+        )
+      })
     }).error(
      // do nothing
     )
@@ -58,7 +78,29 @@ $('#searchForm').submit(function(e){
         dataType: 'json',
         cache: 'false'
       }).done(function(data){
-        console.log(data)
+      results = data.tweets.statuses;
+      results.forEach(function(result){
+        $('#results').append(
+        "<div id='results'>" +
+          "<div class='row'>" +
+            "<div class='col s12'>" +
+              "<div id='tweetCard' class='card horizontal' draggable='true'>" +
+                "<div class='card-image'>" +
+                  "<img id='profileImage' src='" + result.user.profile_image_url + "'>" +
+                "</div>" +
+              "<div class='card-stacked'>" +
+                "<div class='card-content'>" +
+                  "<p>@" + result.user.screen_name + "</p>" +
+                  "<p>" + result.user.name + "</p>" +
+                  "<br />" +
+                  "<p>" + result.text + "</p>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+        "</div>"
+        )
+      })
       }).error(
        // do nothing
       )
@@ -74,16 +116,24 @@ $('#searchForm').submit(function(e){
     return geoLocLat = data.results[0].geometry.location.lat
   }
 
+  var makeSortable = function(data) {
+    $('#results').sortable();
+    $('#results').disableSelection();
+  }
+
 
 // To make sure user enters correct parameters for search
-  if (screenName === '' && searchTerm === '') {
-    $('#errorMessage').html('<p>Please enter either a username or search term</p>')
+  if (screenName === '' && searchTerm === '' && numOfTweets === '') {
+    $('#errorMessage').html('<p>Please enter either a username or search term, and select a number of results to show.</p>');
+  } else if (numOfTweets === '') {
+    $('#errorMessage').html('<p>Please select a number of results to show.</p>');
   } else {
 
 // Calling the api methods depending on if location is used or not
     if (loc === ''){
       $('#errorMessage').html('')
       twitterApiCall(screenName, searchTerm, numOfTweets);
+      makeSortable();
     } else {
       $.ajax({
         url: geolocURL,
@@ -95,14 +145,11 @@ $('#searchForm').submit(function(e){
         longitude = getLongitude(data);
         latitude = getLatitude(data);
         twitterApiCallWithCoords(screenName, searchTerm, numOfTweets, longitude, latitude);
+        makeSortable();
       }).error(
         //do nothing
       )
     }
   }
-
-
-
-
 
 })
