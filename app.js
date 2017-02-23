@@ -39,9 +39,14 @@ var Tweets = new Twitter({
   bearer_token: bearerToken
 });
 
-//Rendering pages
+// Renders web page
+app.get('/', function(req, res){
+  res.render('index')
+});
+
+// Custom backend for more accurate calls
 // If they only choose to search User-Name
-app.get('/:screenName/:searchTerm/:numOfTweets', function(req, res){
+app.get('/both/:screenName/:searchTerm/:numOfTweets', function(req, res){
 
   screenName = "from:" + req.params.screenName;
   // console.log(screenName);
@@ -61,13 +66,109 @@ app.get('/:screenName/:searchTerm/:numOfTweets', function(req, res){
   });
 });
 
-//Twitter Search
-app.get('/', function(req, res){
-  res.render('index')
+app.get('/screenNameOnly/:screenName/:numOfTweets', function(req, res){
+
+  screenName = "from:" + req.params.screenName;
+  // console.log(screenName);
+  numOfTweets = req.params.numOfTweets;
+  // console.log(numOfTweets);
+
+  var params = {q: screenName, count: numOfTweets };
+
+  Tweets.get('search/tweets', params, function(error, tweets, response) {
+    if (!error) {
+      return res.json({ tweets: tweets })
+    } else {
+      console.log(error)
+    }
+  });
+});
+
+app.get('/searchTermOnly/:searchTerm/:numOfTweets', function(req, res){
+
+  searchTerm = req.params.searchTerm;
+  // console.log(searchTerm);
+  numOfTweets = req.params.numOfTweets;
+  // console.log(numOfTweets);
+
+  var params = {q: searchTerm, count: numOfTweets };
+
+  Tweets.get('search/tweets', params, function(error, tweets, response) {
+    if (!error) {
+      return res.json({ tweets: tweets })
+    } else {
+      console.log(error)
+    }
+  });
 });
 
 
 
+// Coords api URLS
+app.get('/both/:screenName/:searchTerm/:numOfTweets/:longitude/:latitude', function(req, res){
+
+  screenName = "from:" + req.params.screenName;
+  // console.log(screenName);
+  searchTerm = req.params.searchTerm;
+  // console.log(searchTerm);
+  numOfTweets = req.params.numOfTweets;
+  // console.log(numOfTweets);
+  geoLocation = req.params.latitude + ',' + req.params.longitude + ',50mi';
+  console.log(geoLocation);
+
+  var params = {q: screenName+" "+searchTerm, count: numOfTweets, geocode: geoLocation };
+
+  Tweets.get('search/tweets', params, function(error, tweets, response) {
+    if (!error) {
+      return res.json({ tweets: tweets })
+    } else {
+      console.log(error)
+    }
+  });
+});
+
+app.get('/screenNameOnly/:screenName/:numOfTweets/:longitude/:latitude',
+  function(req, res){
+
+  screenName = "from:" + req.params.screenName;
+  // console.log(screenName);
+  numOfTweets = req.params.numOfTweets;
+  // console.log(numOfTweets);
+  geoLocation = req.params.latitude + ',' + req.params.longitude + ',50mi';
+  console.log(geoLocation)
+
+
+  var params = {q: screenName, count: numOfTweets, geocode: geoLocation };
+
+  Tweets.get('search/tweets', params, function(error, tweets, response) {
+    if (!error) {
+      return res.json({ tweets: tweets })
+    } else {
+      console.log(error)
+    }
+  });
+});
+
+app.get('/searchTermonly/:searchTerm/:numOfTweets/:longitude/:latitude',
+  function(req, res){
+
+  searchTerm = req.params.searchTerm;
+  // console.log(searchTerm);
+  numOfTweets = req.params.numOfTweets;
+  // console.log(numOfTweets);
+  geoLocation = req.params.latitude + ',' + req.params.longitude + ',50mi';
+
+  var params = {q: searchTerm, count: numOfTweets, geocode: geoLocation };
+  console.log(params)
+
+  Tweets.get('search/tweets', params, function(error, tweets, response) {
+    if (!error) {
+      return res.json({ tweets: tweets })
+    } else {
+      console.log(error)
+    }
+  });
+});
 
 
 
