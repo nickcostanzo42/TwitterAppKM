@@ -6,6 +6,7 @@ An application that uses the Twitter API to allow users to search for Tweets bas
 I chose to develop this application because I enjoy using API's provided by social networking sites.  Instead of just accessing the API directly, I decided to instead use the NPM Twitter package to create an API of my own that the client-side code can communicate with.  This project was completed using JavaScript, Node.js, NPM, HTML5, and CSS3.
 
 Using/Testing:
+
 ** You will need to install a version of node that is greater than 6.0
 
 In order to run this app, first you'll need to git clone it to a directory on your PC.  Second, you'll have to get API key's for both Twitter and Google's Geolocation services (My own Twitter keys are untracked in a .env file, and I've included where you should include Google's API key in index.js line 11).  Third, you'll need to create a bearer token for access to Twitter's API, I've included a script that should be able to help (see: bearer-token-script.js). Finally, traverse to the root directory of the application in your terminal and run NPM Install (this will take a few seconds), and then run the command npm start.  
