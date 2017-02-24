@@ -8,20 +8,23 @@ $('#searchForm').submit(function(e){
   numOfTweets = $('#numOfTweets').val();
   loc = $('#loc').val();
   formatLoc = loc.replace(/\s\s+/g, ' ').replace(/ /g, '+');
-  geolocURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + formatLoc + 'GOOGLE_API_KEY_GOES_HERE';
+  geolocURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + formatLoc + '&key=GOOGLE_API_KEY_GOES_HERE';
 
   // Callback for twitter API call
   twitterApiCall = function(screenName, searchTerm, numOfTweets) {
     // Set up the URL
     if (screenName === "") {
       var twitterSearchUrl = 'http://localhost:4200/searchTermOnly/' + searchTerm + '/' + numOfTweets;
+      var errorMsg = "<p>Search term(s) you entered didn't provide any results.</p>"
     }
     else if (searchTerm === "") {
       var twitterSearchUrl = 'http://localhost:4200/screenNameOnly/' + screenName + '/' + numOfTweets;
+      var errorMsg = "<p>The screen name you entered didn't provide any results.</p>"
     }
     else {
       var twitterSearchUrl = 'http://localhost:4200/both/' + screenName + '/' +
       searchTerm + '/' + numOfTweets;
+      var errorMsg = "<p>The screen name and search term(s) you entered didn't provide any results, try being more specific.</p>"
     }
 
     $(function(){
@@ -30,7 +33,11 @@ $('#searchForm').submit(function(e){
       dataType: 'json',
       cache: 'false'
     }).done(function(data){
+      $('#results').html('');
       results = data.tweets.statuses;
+      if (results.length === 0) {
+        $('#errorMessage').html(errorMsg)
+      } else {
       results.forEach(function(result){
         $('#results').append(
         "<div id='results'>" +
@@ -53,6 +60,7 @@ $('#searchForm').submit(function(e){
         "</div>"
         )
       })
+     }
     }).error(
      // do nothing
     )
@@ -60,16 +68,19 @@ $('#searchForm').submit(function(e){
   }
 
   var twitterApiCallWithCoords = function(screenName, SearchTerm, numOfTweets, longitude, latitude) {
-      console.log(screenName, SearchTerm, numOfTweets, longitude, latitude)
+
       if (screenName === "") {
         var twitterSearchUrl = 'http://localhost:4200/searchTermOnly/' + searchTerm + '/' + numOfTweets + '/' + longitude + '/' + latitude;
+        var errorMsg = "<p>Search term(s) you entered didn't provide any results.</p>"
       }
       else if (searchTerm === "") {
         var twitterSearchUrl = 'http://localhost:4200/screenNameOnly/' + screenName + '/' + numOfTweets + '/' + longitude + '/' + latitude;
+        var errorMsg = "<p>The screen name you entered didn't provide any results.</p>"
       }
       else {
         var twitterSearchUrl = 'http://localhost:4200/both/' + screenName + '/' +
         searchTerm + '/' + numOfTweets + '/' + longitude + '/' + latitude;
+        var errorMsg = "<p>The screen name and search term(s) you entered didn't provide any results, try being more specific.</p>";
       }
 
       $(function(){
@@ -78,6 +89,7 @@ $('#searchForm').submit(function(e){
         dataType: 'json',
         cache: 'false'
       }).done(function(data){
+      $('#results').html('');
       results = data.tweets.statuses;
       results.forEach(function(result){
         $('#results').append(
@@ -94,6 +106,7 @@ $('#searchForm').submit(function(e){
                   "<p>" + result.user.name + "</p>" +
                   "<br />" +
                   "<p>" + result.text + "</p>" +
+                  "<div id='hideResult'>X</div>" +
                 "</div>" +
               "</div>" +
             "</div>" +
@@ -116,11 +129,10 @@ $('#searchForm').submit(function(e){
     return geoLocLat = data.results[0].geometry.location.lat
   }
 
-  var makeSortable = function(data) {
+  var makeSortable = function() {
     $('#results').sortable();
     $('#results').disableSelection();
   }
-
 
 // To make sure user enters correct parameters for search
   if (screenName === '' && searchTerm === '' && numOfTweets === '') {

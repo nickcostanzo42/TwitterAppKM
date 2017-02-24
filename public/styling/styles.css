@@ -13,4 +13,36 @@
   margin-left: 20px;
 }
 
+#hideResult {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
+/* label color */
+ .input-field label {
+   color: #455a64;
+ }
+ /* label focus color */
+ .input-field input[type=text]:focus + label {
+   color: #455a64;
+ }
+ /* label underline focus color */
+ .input-field input[type=text]:focus {
+   border-bottom: 1px solid #455a64;
+   box-shadow: 0 1px 0 0 #455a64;
+ }
+ /* valid color */
+ .input-field input[type=text].valid {
+   border-bottom: 1px solid #455a64;
+   box-shadow: 0 1px 0 0 #455a64;
+ }
+ /* invalid color */
+ .input-field input[type=text].invalid {
+   border-bottom: 1px solid #455a64;
+   box-shadow: 0 1px 0 0 #455a64;
+ }
+ /* icon prefix focus color */
+ .input-field .prefix.active {
+   color: #455a64;
+ }

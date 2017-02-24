@@ -104,7 +104,6 @@ app.get('/both/:screenName/:searchTerm/:numOfTweets/:longitude/:latitude', funct
   searchTerm = req.params.searchTerm;
   numOfTweets = req.params.numOfTweets;
   geoLocation = req.params.latitude + ',' + req.params.longitude + ',50mi';
-  console.log(geoLocation);
 
   var params = {q: screenName+" "+searchTerm, count: numOfTweets, geocode: geoLocation };
 
@@ -123,8 +122,6 @@ app.get('/screenNameOnly/:screenName/:numOfTweets/:longitude/:latitude',
   screenName = "from:" + req.params.screenName;
   numOfTweets = req.params.numOfTweets;
   geoLocation = req.params.latitude + ',' + req.params.longitude + ',50mi';
-  console.log(geoLocation)
-
 
   var params = {q: screenName, count: numOfTweets, geocode: geoLocation };
 
@@ -145,7 +142,6 @@ app.get('/searchTermonly/:searchTerm/:numOfTweets/:longitude/:latitude',
   geoLocation = req.params.latitude + ',' + req.params.longitude + ',50mi';
 
   var params = {q: searchTerm, count: numOfTweets, geocode: geoLocation };
-  console.log(params)
 
   Tweets.get('search/tweets', params, function(error, tweets, response) {
     if (!error) {
@@ -155,6 +151,8 @@ app.get('/searchTermonly/:searchTerm/:numOfTweets/:longitude/:latitude',
     }
   });
 });
+
+
 
 
 
