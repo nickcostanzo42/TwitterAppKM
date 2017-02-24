@@ -1,6 +1,6 @@
-// Script used for getting bearer token
+// Script used for getting bearer token for Twitter's API
 var bearerTokenTo64 = function() {
-  return new Buffer(consumerKey + ':' + consumerSecret).toString('base64');
+  return new Buffer('INSERT_CONSUMER_KEY' + ':' + 'INSER_CONSUMER_KEY_SECRET').toString('base64');
 };
 
 var getBearerToken = function() {
