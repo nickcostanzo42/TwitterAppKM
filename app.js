@@ -27,9 +27,9 @@ var request = require('request');
 // Setup for Twitter package
 // Getting Bearer token to access Twitter API
 // Twitter Keys and Bearer token
-var consumerKey = process.env.CONSUMER_KEY_TWITTER
-var consumerSecret = process.env.CONSUMER_SECRET_TWITTER
-var bearerToken = process.env.BEARER_TOKEN_TWITTER
+var consumerKey = "CONSUMER_KEY_GOES_HERE"
+var consumerSecret = "CONSUMER_KEY_SECRET_GOES_HERE"
+var bearerToken = 'BEARER_TOKEN_GOES_HERE'
 
 var Twitter = require('twitter');
 
