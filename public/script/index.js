@@ -8,7 +8,7 @@ $('#searchForm').submit(function(e){
   numOfTweets = $('#numOfTweets').val();
   loc = $('#loc').val();
   formatLoc = loc.replace(/\s\s+/g, ' ').replace(/ /g, '+');
-  geolocURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + formatLoc + '&key=GOOGLE_API_KEY_GOES_HERE';
+  geolocURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + formatLoc + '&key=GOOGLE_GEOLOC_API_GOES_HERE';
 
   // Callback for twitter API call
   twitterApiCall = function(screenName, searchTerm, numOfTweets) {
